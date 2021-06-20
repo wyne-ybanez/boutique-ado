@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Product, Category
 
 # Ordering according to Sku first.
-# Change list display in Admin site.
+# Change list display (Fields) in Admin site.
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
