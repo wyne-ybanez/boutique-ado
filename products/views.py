@@ -23,6 +23,13 @@ def all_products(request):
                 sortkey = 'lower_name'
                 # Annotate with a new field
                 products = products.annotate(lower_name=Lower('name'))
+                if sortkey == 'category':
+                    sortkey = 'category__name'
+                if 'direction' in request.GET:
+                    direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+                products = products.order_by(sortkey)
 
             if 'direction' in request.GET:
                 direction = request.GET['direction']
@@ -45,6 +52,7 @@ def all_products(request):
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
+    # sorting which is decided also by main-nav
     current_sorting = f'{sort}_{direction}'
 
     context = {
