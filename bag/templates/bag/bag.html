@@ -56,6 +56,7 @@
                                 </tr>
                             {% endfor %}
                             <tr>
+                                <!-- Provided in Bag context -->
                                 <td colspan="5" class="pt-5 text-right">
                                     <h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
                                     <h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
@@ -69,12 +70,14 @@
                             </tr>
                             <tr>
                                 <td colspan="5" class="text-right">
+                                    <!-- Button to go back -->
                                     <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
                                         <span class="icon">
                                             <i class="fas fa-chevron-left"></i>
                                         </span>
                                         <span class="text-uppercase">Keep Shopping</span>
                                     </a>
+                                    <!-- Button to checkout -->
                                     <a href="" class="btn btn-black rounded-0 btn-lg">
                                         <span class="text-uppercase">Secure Checkout</span>
                                         <span class="icon">
