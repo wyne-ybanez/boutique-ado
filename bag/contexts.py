@@ -6,6 +6,10 @@ from products.models import Product
 
 
 def bag_contents(request):
+    """
+    item_id and item_data derived from for loop into bag dictionary.
+    These are appended into bag_items list as a dictionary.
+    """
     bag_items = []
     total = 0
     product_count = 0
@@ -31,7 +35,7 @@ def bag_contents(request):
                 product_count += quantity
                 bag_items.append({
                     'item_id': item_id,
-                    'quantity': item_data,
+                    'quantity': quantity,
                     'product': product,
                     'size': size,
                 })
