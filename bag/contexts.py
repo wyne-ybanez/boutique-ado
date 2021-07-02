@@ -7,6 +7,7 @@ from products.models import Product
 
 def bag_contents(request):
     """
+    Contents within bag.
     item_id and item_data derived from for loop into bag dictionary.
     These are appended into bag_items list as a dictionary.
     """
@@ -27,8 +28,7 @@ def bag_contents(request):
                 'product': product,
             })
         else:
-            # If there is a size, we know its a dictionary, iterate through 'items_by_size' inner dictionary 
-            # Iterate through its key,value pairs for size and quantity
+            # Else there is a size, we know its a dictionary, iterate through inner dictionary.
             product = get_object_or_404(Product, pk=item_id)
             for size, quantity in item_data['items_by_size'].items():
                 total += quantity * product.price
