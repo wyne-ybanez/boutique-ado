@@ -29,11 +29,7 @@ class OrderForm(forms.ModelForm):
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
-
-        # Add star to required fields
-        # Attach placeholder attributes to their appropriate values
-        # Add class to placeholders
-        # Set labels to false because placeholders are already defined
+        
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
