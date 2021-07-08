@@ -17,22 +17,19 @@ def all_products(request):
     direction = None
 
     if request.GET:
-        # Renamed make sure the sort original field name remains the same.
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
             if sortkey == 'name':
                 sortkey = 'lower_name'
-                # Annotate with a new field
                 products = products.annotate(lower_name=Lower('name'))
-                if sortkey == 'category':
-                    sortkey = 'category__name'
-                if 'direction' in request.GET:
-                    direction = request.GET['direction']
+            if sortkey == 'category':
+                sortkey = 'category__name'
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
                 if direction == 'desc':
-                    # This reverses the order of the sort
                     sortkey = f'-{sortkey}'
-                products = products.order_by(sortkey)
+            products = products.order_by(sortkey)
             
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
@@ -48,7 +45,6 @@ def all_products(request):
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
-    # sorting which is decided also by main-nav
     current_sorting = f'{sort}_{direction}'
 
     context = {
